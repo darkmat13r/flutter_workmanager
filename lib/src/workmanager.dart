@@ -15,7 +15,7 @@ const _noDuration = const Duration(seconds: 0);
 /// [taskName] Returns the value you provided when registering the task.
 /// iOS will always return [Workmanager.iOSBackgroundTask]
 typedef BackgroundTaskHandler = Future<bool> Function(
-    String taskName, Map<String, dynamic> inputData);
+    String taskName, Map<String, dynamic> inputData, Map<String, dynamic> stepCount);
 
 /// Make sure you followed the platform setup steps first before trying to register any task.
 /// Android:
@@ -77,9 +77,11 @@ class Workmanager {
     WidgetsFlutterBinding.ensureInitialized();
     _backgroundChannel.setMethodCallHandler((call) async {
       final inputData = call.arguments["be.tramckrijte.workmanager.INPUT_DATA"];
+      final stepCount = call.arguments["be.tramckrijte.workmanager.STEP_COUNT"];
       return backgroundTask(
         call.arguments["be.tramckrijte.workmanager.DART_TASK"],
         inputData == null ? null : jsonDecode(inputData),
+        stepCount == null ? null : jsonDecode(stepCount),
       );
     });
     _backgroundChannel.invokeMethod("backgroundChannelInitialized");

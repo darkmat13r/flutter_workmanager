@@ -14,10 +14,10 @@ const simplePeriodicTask = "simplePeriodicTask";
 const simplePeriodic1HourTask = "simplePeriodic1HourTask";
 
 void callbackDispatcher() {
-  Workmanager.executeTask((task, inputData) async {
+  Workmanager.executeTask((task, inputData, stepCount) async {
     switch (task) {
       case simpleTaskKey:
-        print("$simpleTaskKey was executed. inputData = $inputData");
+        print("$simpleTaskKey was executed. inputData = $inputData stepCount  = $stepCount");
         final prefs = await SharedPreferences.getInstance();
         prefs.setBool("test", true);
         print("Bool from prefs: ${prefs.getBool("test")}");
