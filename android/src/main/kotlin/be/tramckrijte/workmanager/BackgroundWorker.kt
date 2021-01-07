@@ -128,7 +128,7 @@ class BackgroundWorker(
 
                         override fun success(receivedResult: Any?) {
                             val wasSuccessFul = receivedResult?.let { it as Boolean? } == true
-                            stopEngine(if (wasSuccessFul) Result.success() else Result.retry())
+                           // stopEngine(if (wasSuccessFul) Result.success() else Result.retry())
                         }
                     })
         }
